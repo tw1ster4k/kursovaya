@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sales</title>
+</head>
+<body>
+<h1>Sales</h1>
+
+<a href="/sales-web/add">Add New Sale</a>
+
+<table border="1">
+    <a href="/sales-web/filter-by-product">Filter By Product</a>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Order</th>
+        <th>Sale Date</th>
+        <th>Total Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sale : ${sales}">
+        <td th:text="${sale.id}"></td>
+        <td th:text="${sale.order.customer.name}"></td>
+        <td th:text="${sale.saleDate}"></td>
+        <td th:text="${sale.totalAmount}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Количество заказов по клиентам</title>
+</head>
+<body>
+<h1>Количество заказов по каждому клиенту</h1>
+<table border="1">
+    <tr>
+        <th>Customer ID</th>
+        <th>Orders Count</th>
+    </tr>
+    <tr th:each="entry : ${ordersCount}">
+        <td th:text="${entry.key}"></td>
+        <td th:text="${entry.value}"></td>
+    </tr>
+</table>
+<a href="/">Назад</a>
+</body>
+</html>

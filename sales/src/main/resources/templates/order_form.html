@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Form</title>
+</head>
+<body>
+<h1 th:text="${order.id == null} ? 'Add Order' : 'Edit Order'"></h1>
+
+<form th:action="@{/orders/{action}(action=${order.id == null ? 'add' : 'edit'})}"
+      th:object="${order}"
+      method="post">
+    <label for="customer">Customer:</label>
+    <select id="customer" th:field="*{customer.customerId}">
+        <option value="">-- select customer --</option>
+        <option th:each="cust : ${customers}" th:value="${cust.customerId}" th:text="${cust.name}"></option>
+    </select>
+    <br/><br/>
+
+    <label for="orderDate">Order Date:</label>
+    <input type="datetime-local" id="orderDate" th:field="*{orderDate}" />
+    <br/><br/>
+
+    <label for="status">Status:</label>
+    <input type="text" id="status" th:field="*{status}" />
+    <br/><br/>
+
+    <h3>Order Items:</h3>
+    <div th:each="item, iterStat : *{orderItems}">
+        <label>Product:</label>
+        <select th:field="*{orderItems[__${iterStat.index}__].product.id}">
+            <option th:each="prod : ${products}" th:value="${prod.id}" th:text="${prod.name}"></option>
+        </select>
+
+        <label>Quantity:</label>
+        <input type="number" min="1" th:field="*{orderItems[__${iterStat.index}__].quantity}" />
+        <br/><br/>
+    </div>
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="/orders/">Back to Orders</a>
+</body>
+</html>

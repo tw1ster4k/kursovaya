@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Топ-N продуктов</title>
+</head>
+<body>
+<h1>Топ продуктов по количеству продаж</h1>
+<table border="1">
+    <tr>
+        <th>Product ID</th>
+    </tr>
+    <tr th:each="id : ${topProducts}">
+        <td th:text="${id}"></td>
+    </tr>
+</table>
+<a href="/">Назад</a>
+</body>
+</html>

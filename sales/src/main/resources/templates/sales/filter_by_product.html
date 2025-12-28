@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Фильтрация продаж по продукту</title>
+</head>
+<body>
+<h1>Фильтрация продаж по продукту</h1>
+
+<form th:action="@{/sales-web/filter-by-product}" method="get">
+    <label>Выберите продукт:</label>
+    <select name="productId">
+        <option value="" th:text="'-- Все продукты --'"></option>
+        <option th:each="product : ${products}"
+                th:value="${product.id}"
+                th:text="${product.name}"
+                th:selected="${product.id} == ${selectedProductId}">
+        </option>
+    </select>
+    <button type="submit">Фильтровать</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID продажи</th>
+        <th>Заказ</th>
+        <th>Дата продажи</th>
+        <th>Сумма</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sale : ${sales}">
+        <td th:text="${sale.id}"></td>
+        <td th:text="${sale.order.id}"></td>
+        <td th:text="${sale.saleDate}"></td>
+        <td th:text="${sale.totalAmount}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/sales-web">Назад к продажам</a>
+</body>
+</html>

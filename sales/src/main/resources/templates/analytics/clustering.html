@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Кластеризация клиентов</title>
+</head>
+<body>
+<h1>Кластеры клиентов по активности (сумма продаж * количество заказов)</h1>
+<div th:each="cluster : ${customerClusters}">
+    <h3>Кластер <span th:text="${cluster.key}"></span></h3>
+    <ul>
+        <li th:each="customer : ${cluster.value}">
+            <span th:text="'ID: ' + ${customer.customerId} + ', Имя: ' + ${customer.name} + 
+            ', Кол-во заказов: ' + ${customer.ordersCount} + ', Активность: ' + ${customer.totalActivity}"></span>
+        </li>
+    </ul>
+</div>
+<a href="/">Назад</a>
+</body>
+</html>

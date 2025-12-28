@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sale Form</title>
+</head>
+<body>
+<h1 th:text="${sale.id == null} ? 'Add Sale' : 'Edit Sale'"></h1>
+
+<form th:action="@{${sale.id == null} ? '/sales-web/add' : '/sales-web/edit'}" th:object="${sale}" method="post">
+
+    <label for="saleDate">Sale Date:</label>
+    <input type="datetime-local" id="saleDate" th:field="*{saleDate}" required />
+    <br/><br/>
+
+    <label for="totalAmount">Total Amount:</label>
+    <input type="number" id="totalAmount" th:field="*{totalAmount}" step="0.01" required />
+    <br/><br/>
+
+    <label for="order">Order:</label>
+    <select id="order" name="order">
+        <option th:each="o : ${orders}" th:value="${o.id}" th:text="${o.id + ' - ' + o.customer.name}"  th:selected="${sale.order != null} ? ${o.id} == ${sale.order.id} : false"></option>
+    </select>
+    <br/><br/>
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="/sales-web/">Back to Sales</a>
+</body>
+</html>
